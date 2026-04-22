@@ -3,300 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>pink cards — элегантное изучение</title>
+    <title>pink cards — учим английский</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: linear-gradient(145deg, #fff0f5 0%, #ffe4ec 100%);
             min-height: 100vh;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-weight: 320;
             padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
-        .app {
-            max-width: 560px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        /* хедер */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 32px;
-            padding: 0 6px;
-        }
-
-        h1 {
-            font-size: 1.7rem;
-            font-weight: 340;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #db2777, #f472b6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .level-badge {
-            font-size: 0.7rem;
-            font-weight: 350;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(4px);
-            padding: 6px 14px;
-            border-radius: 40px;
-            color: #be185d;
-            letter-spacing: 0.3px;
-            border: 0.5px solid rgba(219, 39, 119, 0.2);
-        }
-
-        /* уровни — стеклянные кнопки */
-        .levels {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 32px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .level-btn {
-            flex: 1;
-            min-width: 62px;
-            background: rgba(255, 240, 245, 0.7);
-            backdrop-filter: blur(4px);
-            border: 0.5px solid rgba(219, 39, 119, 0.15);
-            padding: 8px 0;
-            border-radius: 60px;
-            font-size: 0.75rem;
-            font-weight: 340;
-            letter-spacing: 0.5px;
-            color: #9d174d;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            font-family: inherit;
-        }
-
-        .level-btn.active {
-            background: #fbcfe8;
-            color: #be185d;
-            font-weight: 380;
-            border-color: #f472b6;
-            box-shadow: 0 2px 8px rgba(219, 39, 119, 0.12);
-        }
-
-        /* карточка — элегантная, с мягкой тенью */
-        .card-wrapper {
-            perspective: 1400px;
-            margin: 8px 0 28px;
-            cursor: pointer;
-        }
-
-        .card {
-            position: relative;
-            width: 100%;
-            min-height: 380px;
-            transition: transform 0.55s cubic-bezier(0.23, 0.98, 0.32, 1.02);
-            transform-style: preserve-3d;
-            border-radius: 44px;
-        }
-
-        .card.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            min-height: 380px;
-            backface-visibility: hidden;
-            border-radius: 44px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 36px 24px;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(2px);
-            box-shadow: 0 20px 35px -12px rgba(219, 39, 119, 0.12);
-            border: 0.5px solid rgba(244, 114, 182, 0.25);
-        }
-
-        .card-front {
-            transform: rotateY(0deg);
-            background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,248,250,0.96));
-        }
-
-        .card-back {
-            transform: rotateY(180deg);
-            background: linear-gradient(135deg, #fff5f9, #fff0f8);
-        }
-
-        .word {
-            font-size: 2.9rem;
-            font-weight: 360;
-            letter-spacing: -0.3px;
-            color: #831843;
-            margin-bottom: 20px;
-            text-align: center;
-            word-break: break-word;
-        }
-
-        .translation {
-            font-size: 2rem;
-            font-weight: 340;
-            color: #db2777;
-            margin: 12px 0;
-            text-align: center;
-        }
-
-        .assoc {
-            font-size: 3.5rem;
-            margin-top: 16px;
-            filter: drop-shadow(0 2px 6px rgba(219,39,119,0.1));
-            animation: gentleFloat 2s ease-in-out infinite;
-        }
-
-        @keyframes gentleFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .flip-hint {
-            font-size: 0.65rem;
-            font-weight: 300;
-            color: #f9a8d4;
-            margin-top: 28px;
-            display: flex;
-            gap: 8px;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-        }
-
-        /* кнопки — нежные */
-        .actions {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin: 20px 0 28px;
-            flex-wrap: wrap;
-        }
-
-        button {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(4px);
-            border: 0.5px solid rgba(219, 39, 119, 0.25);
-            padding: 10px 20px;
-            border-radius: 60px;
-            font-size: 0.85rem;
-            font-weight: 330;
-            font-family: inherit;
-            color: #9d174d;
-            cursor: pointer;
-            transition: all 0.2s;
-            letter-spacing: 0.3px;
-        }
-
-        button:active {
-            transform: scale(0.95);
-            background: #fce7f3;
-        }
-
-        .btn-know {
-            background: #fdf2f8;
-            border-color: #f472b6;
-            color: #be185d;
-            font-weight: 360;
-        }
-
-        /* форма добавления — минималистичная */
-        .add-panel {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(8px);
-            border-radius: 36px;
-            padding: 20px 18px;
-            margin: 12px 0 20px;
-            border: 0.5px solid rgba(244, 114, 182, 0.3);
-        }
-
-        .add-title {
-            font-size: 0.7rem;
-            font-weight: 340;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #ec489a;
-            margin-bottom: 14px;
-        }
-
-        .input-row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 12px;
-        }
-
-        input, select {
-            flex: 1;
-            padding: 12px 16px;
-            border: 0.5px solid rgba(219, 39, 119, 0.25);
-            border-radius: 48px;
-            font-size: 0.85rem;
-            font-family: inherit;
-            font-weight: 320;
-            background: rgba(255, 255, 255, 0.9);
-            color: #4a044e;
-            transition: 0.2s;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #f472b6;
-            background: white;
-        }
-
-        /* статистика */
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 18px;
-            background: rgba(255, 240, 245, 0.6);
-            backdrop-filter: blur(4px);
-            border-radius: 60px;
-            font-size: 0.7rem;
-            font-weight: 320;
-            color: #be185d;
-            margin-top: 12px;
-            border: 0.5px solid rgba(244, 114, 182, 0.2);
-        }
-
-        .stats strong {
-            font-weight: 400;
-            color: #db2777;
-        }
-
-        footer {
-            text-align: center;
-            font-size: 0.58rem;
-            font-weight: 300;
-            color: #f9a8d4;
-            margin-top: 20px;
-            letter-spacing: 0.4px;
-        }
-
-        @media (max-width: 520px) {
-            .word { font-size: 2rem; }
-            .translation { font-size: 1.5rem; }
-            .card-front, .card-back { min-height: 320px; }
-            .level-btn { font-size: 0.65rem; min-width: 52px; }
-        }
+        .app { max-width: 560px; width: 100%; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+        h1 { font-size: 1.7rem; font-weight: 340; letter-spacing: -0.5px; background: linear-gradient(135deg, #db2777, #f472b6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .level-badge { font-size: 0.7rem; font-weight: 350; background: rgba(255,255,255,0.7); backdrop-filter: blur(4px); padding: 6px 14px; border-radius: 40px; color: #be185d; border: 0.5px solid rgba(219,39,119,0.2); }
+        .filters { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+        .levels-row, .pos-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+        .level-btn, .pos-btn { background: rgba(255,240,245,0.7); backdrop-filter: blur(4px); border: 0.5px solid rgba(219,39,119,0.15); padding: 8px 0; border-radius: 60px; font-size: 0.75rem; font-weight: 340; color: #9d174d; cursor: pointer; transition: all 0.25s ease; font-family: inherit; }
+        .level-btn { flex: 1; min-width: 55px; }
+        .pos-btn { padding: 6px 16px; }
+        .level-btn.active, .pos-btn.active { background: #fbcfe8; color: #be185d; border-color: #f472b6; }
+        .card-wrapper { perspective: 1400px; margin: 8px 0 24px; cursor: pointer; }
+        .card { position: relative; width: 100%; min-height: 380px; transition: transform 0.55s cubic-bezier(0.23,0.98,0.32,1.02); transform-style: preserve-3d; border-radius: 44px; }
+        .card.flipped { transform: rotateY(180deg); }
+        .card-front, .card-back { position: absolute; width: 100%; min-height: 380px; backface-visibility: hidden; border-radius: 44px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 36px 24px; background: rgba(255,255,255,0.92); backdrop-filter: blur(2px); box-shadow: 0 20px 35px -12px rgba(219,39,119,0.12); border: 0.5px solid rgba(244,114,182,0.25); }
+        .card-front { background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,248,250,0.96)); transform: rotateY(0deg); }
+        .card-back { transform: rotateY(180deg); background: linear-gradient(135deg, #fff5f9, #fff0f8); }
+        .word { font-size: 2.6rem; font-weight: 360; letter-spacing: -0.3px; color: #831843; margin-bottom: 12px; text-align: center; word-break: break-word; }
+        .translation { font-size: 1.8rem; font-weight: 340; color: #db2777; margin: 12px 0; text-align: center; }
+        .assoc { font-size: 3rem; margin-top: 12px; filter: drop-shadow(0 2px 6px rgba(219,39,119,0.1)); animation: gentleFloat 2s ease-in-out infinite; }
+        @keyframes gentleFloat { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
+        .flip-hint { font-size: 0.65rem; font-weight: 300; color: #f9a8d4; margin-top: 20px; letter-spacing: 0.6px; }
+        .actions { display: flex; gap: 10px; justify-content: center; margin: 16px 0 24px; flex-wrap: wrap; }
+        button { background: rgba(255,255,255,0.85); backdrop-filter: blur(4px); border: 0.5px solid rgba(219,39,119,0.25); padding: 10px 20px; border-radius: 60px; font-size: 0.85rem; font-weight: 330; font-family: inherit; color: #9d174d; cursor: pointer; transition: all 0.2s; }
+        button:active { transform: scale(0.95); background: #fce7f3; }
+        .btn-know { background: #fdf2f8; border-color: #f472b6; color: #be185d; font-weight: 360; }
+        .add-panel { background: rgba(255,255,255,0.65); backdrop-filter: blur(8px); border-radius: 36px; padding: 18px; margin: 12px 0 16px; border: 0.5px solid rgba(244,114,182,0.3); }
+        .add-title { font-size: 0.7rem; font-weight: 340; text-transform: uppercase; letter-spacing: 1.5px; color: #ec489a; margin-bottom: 12px; }
+        .input-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+        input, select { flex: 1; padding: 10px 14px; border: 0.5px solid rgba(219,39,119,0.25); border-radius: 48px; font-size: 0.8rem; font-family: inherit; font-weight: 320; background: rgba(255,255,255,0.9); color: #4a044e; }
+        input:focus, select:focus { outline: none; border-color: #f472b6; }
+        .stats { display: flex; justify-content: space-between; padding: 10px 16px; background: rgba(255,240,245,0.6); backdrop-filter: blur(4px); border-radius: 60px; font-size: 0.7rem; font-weight: 320; color: #be185d; border: 0.5px solid rgba(244,114,182,0.2); }
+        .stats strong { font-weight: 400; color: #db2777; }
+        footer { text-align: center; font-size: 0.55rem; font-weight: 300; color: #f9a8d4; margin-top: 16px; }
+        @media (max-width: 520px) { .word { font-size: 2rem; } .translation { font-size: 1.4rem; } .card-front, .card-back { min-height: 300px; } }
     </style>
 </head>
 <body>
@@ -305,319 +58,231 @@
         <h1>🌸 pink cards</h1>
         <div class="level-badge" id="levelBadge">A1 · начальный</div>
     </div>
-
-    <div class="levels" id="levelButtons">
-        <button class="level-btn" data-level="A1">A1</button>
-        <button class="level-btn" data-level="A2">A2</button>
-        <button class="level-btn" data-level="B1">B1</button>
-        <button class="level-btn" data-level="B2">B2</button>
-        <button class="level-btn" data-level="C1">C1</button>
-    </div>
-
-    <div class="card-wrapper" id="cardWrapper">
-        <div class="card" id="card">
-            <div class="card-front">
-                <div class="word" id="frontWord">word</div>
-                <div class="flip-hint">
-                    <span>✧ нажми ✧</span>
-                </div>
-            </div>
-            <div class="card-back">
-                <div class="translation" id="backTranslation">перевод</div>
-                <div class="assoc" id="assocEmoji">🌸</div>
-                <div class="flip-hint">✧ ассоциация ✧</div>
-            </div>
+    <div class="filters">
+        <div class="levels-row" id="levelButtons">
+            <button class="level-btn" data-level="A1">A1</button>
+            <button class="level-btn" data-level="A2">A2</button>
+            <button class="level-btn" data-level="B1">B1</button>
+            <button class="level-btn" data-level="B2">B2</button>
+            <button class="level-btn" data-level="C1">C1</button>
+        </div>
+        <div class="pos-row" id="posButtons">
+            <button class="pos-btn" data-pos="all">📚 все</button>
+            <button class="pos-btn" data-pos="noun">🏷️ сущ.</button>
+            <button class="pos-btn" data-pos="adjective">🎨 прил.</button>
+            <button class="pos-btn" data-pos="verb">⚡ гл.</button>
         </div>
     </div>
-
+    <div class="card-wrapper" id="cardWrapper">
+        <div class="card" id="card">
+            <div class="card-front"><div class="word" id="frontWord">loading...</div><div class="flip-hint">✧ нажми ✧</div></div>
+            <div class="card-back"><div class="translation" id="backTranslation"></div><div class="assoc" id="assocEmoji">🌸</div><div class="flip-hint">✧ ассоциация ✧</div></div>
+        </div>
+    </div>
     <div class="actions">
         <button id="prevBtn">◀ prev</button>
         <button id="knowBtn" class="btn-know">✓ знаю</button>
         <button id="dontKnowBtn">↻ повтор</button>
         <button id="nextBtn">next ▶</button>
     </div>
-
     <div class="add-panel">
-        <div class="add-title">+ новое слово</div>
+        <div class="add-title">+ своё слово</div>
         <div class="input-row">
-            <input type="text" id="newWord" placeholder="английское слово" autocomplete="off">
+            <input type="text" id="newWord" placeholder="английское" autocomplete="off">
             <input type="text" id="newTrans" placeholder="перевод" autocomplete="off">
         </div>
         <div class="input-row">
-            <input type="text" id="newEmoji" placeholder="🎀 эмодзи (оставь пустым для случайного)" autocomplete="off">
-            <select id="newLevel">
-                <option value="A1">A1</option>
-                <option value="A2">A2</option>
-                <option value="B1" selected>B1</option>
-                <option value="B2">B2</option>
-                <option value="C1">C1</option>
-            </select>
-            <button id="addWordBtn" style="background:#fce7f3;">✨ добавить</button>
+            <select id="newPos"><option value="noun">существительное</option><option value="adjective">прилагательное</option><option value="verb">глагол</option></select>
+            <select id="newLevel"><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option><option value="B2">B2</option><option value="C1">C1</option></select>
+            <input type="text" id="newEmoji" placeholder="🎀 эмодзи" style="max-width:80px;">
+            <button id="addWordBtn">✨</button>
         </div>
     </div>
-
     <div class="stats" id="statsPanel">
         <span>📖 в уровне: <strong id="totalCount">0</strong></span>
         <span>💗 выучено: <strong id="learnedCount">0</strong></span>
         <span>🔄 на повтор: <strong id="reviewCount">0</strong></span>
     </div>
-    <footer>tap card · ← → · пробел переворот · enter = знаю</footer>
+    <footer>tap · ← → · пробел · enter = знаю</footer>
 </div>
 
+<script src="words.js"></script>
 <script>
-    // ---------- БОЛЬШАЯ БИБЛИОТЕКА РАНДОМНЫХ ЭМОДЗИ-АССОЦИАЦИЙ ----------
-    const emojiLibrary = [
-        "🌸", "🌺", "🦋", "🐇", "⭐", "✨", "💖", "🍰", "🎀", "🕊️", "🍃", "🌙", 
-        "💫", "🍬", "🐚", "🧸", "🍒", "🎈", "💝", "🌼", "🪶", "☁️", "🍭", "🐩",
-        "🎐", "🧁", "🍓", "🐝", "🪷", "🐰", "💗", "🍑", "🦢", "🌷", "🕯️", "🧚"
-    ];
-
-    function getRandomEmoji() {
-        return emojiLibrary[Math.floor(Math.random() * emojiLibrary.length)];
-    }
-
-    // ---------- БАЗА ДАННЫХ ----------
-    let words = [
-        { id: 1, word: "apple", translation: "яблоко", level: "A1", mastered: false, repeatPenalty: 0, emoji: "🍎" },
-        { id: 2, word: "house", translation: "дом", level: "A1", mastered: false, repeatPenalty: 0, emoji: "🏠" },
-        { id: 3, word: "beautiful", translation: "красивый", level: "A2", mastered: false, repeatPenalty: 0, emoji: "🌸" },
-        { id: 4, word: "quickly", translation: "быстро", level: "A2", mastered: false, repeatPenalty: 0, emoji: "⚡" },
-        { id: 5, word: "adventure", translation: "приключение", level: "B1", mastered: false, repeatPenalty: 0, emoji: "✨" },
-        { id: 6, word: "enormous", translation: "огромный", level: "B1", mastered: false, repeatPenalty: 0, emoji: "🐘" },
-        { id: 7, word: "nevertheless", translation: "тем не менее", level: "B2", mastered: false, repeatPenalty: 0, emoji: "🌙" },
-        { id: 8, word: "sophisticated", translation: "утонченный", level: "C1", mastered: false, repeatPenalty: 0, emoji: "🎀" }
-    ];
-
+    // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+    let words = [];
     let currentLevel = "A1";
+    let currentPos = "all";
     let currentIndex = 0;
     let isFlipped = false;
-    let currentLevelWords = [];
+    let filteredWords = [];
 
-    // ---------- СОХРАНЕНИЕ ----------
-    function saveToLocal() {
-        localStorage.setItem("pinkcards_words_v2", JSON.stringify(words));
-        localStorage.setItem("pinkcards_level_v2", currentLevel);
+    const emojiLibrary = ["🌸","🌺","🦋","🐇","⭐","✨","💖","🍰","🎀","🕊️","🍃","🌙","💫","🍬","🐚","🧸","🍒","🎈","💝","🌼","🪶","☁️","🍭","🐩","🎐","🧁","🍓","🐝","🪷","🐰","💗","🍑","🦢","🌷"];
+    function getRandomEmoji() { return emojiLibrary[Math.floor(Math.random() * emojiLibrary.length)]; }
+
+    // ========== ЗАГРУЗКА ИЗ words.js ==========
+    function loadWords() {
+        if (typeof wordsDatabase !== 'undefined') {
+            words = JSON.parse(JSON.stringify(wordsDatabase)); // глубокое копирование
+            console.log(`✅ Загружено ${words.length} слов из words.js`);
+            initApp();
+        } else {
+            console.error('❌ wordsDatabase не найден. Проверьте подключение words.js');
+            alert('Ошибка загрузки слов. Убедитесь, что файл words.js находится в той же папке.');
+        }
     }
 
-    function loadFromLocal() {
-        const savedWords = localStorage.getItem("pinkcards_words_v2");
-        if (savedWords) {
+    // ========== СОХРАНЕНИЕ ПРОГРЕССА ==========
+    function saveToLocal() {
+        localStorage.setItem("pinkcards_words_data", JSON.stringify(words));
+        localStorage.setItem("pinkcards_level", currentLevel);
+        localStorage.setItem("pinkcards_pos", currentPos);
+    }
+
+    function loadProgressFromLocal() {
+        const saved = localStorage.getItem("pinkcards_words_data");
+        if (saved) {
             try {
-                const parsed = JSON.parse(savedWords);
-                if (parsed.length) words = parsed;
+                const savedWords = JSON.parse(saved);
+                if (savedWords.length === words.length) {
+                    words = savedWords;
+                }
             } catch(e) {}
         }
-        const savedLevel = localStorage.getItem("pinkcards_level_v2");
-        if (savedLevel && ["A1","A2","B1","B2","C1"].includes(savedLevel)) {
-            currentLevel = savedLevel;
-        }
+        const savedLevel = localStorage.getItem("pinkcards_level");
+        if (savedLevel) currentLevel = savedLevel;
+        const savedPos = localStorage.getItem("pinkcards_pos");
+        if (savedPos) currentPos = savedPos;
     }
 
-    function updateCurrentLevelList() {
+    // ========== ФИЛЬТРАЦИЯ ==========
+    function filterWords() {
         let filtered = words.filter(w => w.level === currentLevel);
-        currentLevelWords = [...filtered].sort((a,b) => (b.repeatPenalty || 0) - (a.repeatPenalty || 0));
-        if (currentIndex >= currentLevelWords.length) currentIndex = 0;
-        if (currentLevelWords.length === 0) currentIndex = 0;
+        if (currentPos !== "all") filtered = filtered.filter(w => w.pos === currentPos);
+        return [...filtered].sort((a,b) => (b.repeatPenalty || 0) - (a.repeatPenalty || 0));
     }
 
+    function updateFilteredList() {
+        filteredWords = filterWords();
+        if (currentIndex >= filteredWords.length) currentIndex = 0;
+        if (filteredWords.length === 0) currentIndex = 0;
+        renderCard();
+        updateStatsUI();
+    }
+
+    // ========== ОТОБРАЖЕНИЕ ==========
     function renderCard() {
-        if (currentLevelWords.length === 0) {
+        if (filteredWords.length === 0) {
             document.getElementById("frontWord").innerText = "✨ add words";
-            document.getElementById("backTranslation").innerText = "добавь слова";
+            document.getElementById("backTranslation").innerHTML = "нет слов в этой категории";
             document.getElementById("assocEmoji").innerHTML = "🌸";
             return;
         }
-        const card = currentLevelWords[currentIndex];
+        const card = filteredWords[currentIndex];
         document.getElementById("frontWord").innerText = card.word;
-        document.getElementById("backTranslation").innerHTML = `${card.translation}`;
+        const posText = { noun: "существительное", adjective: "прилагательное", verb: "глагол" }[card.pos] || "";
+        document.getElementById("backTranslation").innerHTML = `<span style="font-size:0.9rem; opacity:0.7;">${posText}</span><br>${card.translation}`;
         document.getElementById("assocEmoji").innerHTML = card.emoji || getRandomEmoji();
-        
-        if (isFlipped) {
-            document.getElementById("card").classList.remove("flipped");
-            isFlipped = false;
-        }
-        updateStatsUI();
+        if (isFlipped) { document.getElementById("card").classList.remove("flipped"); isFlipped = false; }
     }
 
-    function flipCard() {
-        if (currentLevelWords.length === 0) return;
-        document.getElementById("card").classList.toggle("flipped");
-        isFlipped = !isFlipped;
-    }
+    function flipCard() { if (filteredWords.length) { document.getElementById("card").classList.toggle("flipped"); isFlipped = !isFlipped; } }
 
-    // ---------- МЕХАНИКА ПРОГРЕССА ----------
+    // ========== МЕХАНИКА ОБУЧЕНИЯ ==========
     function markAsKnown() {
-        if (currentLevelWords.length === 0) return;
-        const currentWordObj = currentLevelWords[currentIndex];
-        const original = words.find(w => w.id === currentWordObj.id);
+        if (!filteredWords.length) return;
+        const original = words.find(w => w.id === filteredWords[currentIndex].id);
         if (!original) return;
-        
-        const levelOrder = ["A1", "A2", "B1", "B2", "C1"];
+        const levelOrder = ["A1","A2","B1","B2","C1"];
         const idx = levelOrder.indexOf(original.level);
-        
-        if (idx < levelOrder.length - 1) {
-            original.level = levelOrder[idx + 1];
-            original.repeatPenalty = 0;
-            original.mastered = false;
-        } else {
-            if (!original.mastered) {
-                original.mastered = true;
-                original.repeatPenalty = 0;
-            }
-        }
-        
+        if (idx < levelOrder.length - 1) { original.level = levelOrder[idx + 1]; original.repeatPenalty = 0; }
+        else { original.mastered = true; original.repeatPenalty = 0; }
         saveToLocal();
-        moveToNextAfterAction();
+        updateFilteredList();
     }
 
     function markAsDontKnow() {
-        if (currentLevelWords.length === 0) return;
-        const currentWordObj = currentLevelWords[currentIndex];
-        const original = words.find(w => w.id === currentWordObj.id);
+        if (!filteredWords.length) return;
+        const original = words.find(w => w.id === filteredWords[currentIndex].id);
         if (!original) return;
-        
         original.repeatPenalty = (original.repeatPenalty || 0) + 1;
         original.mastered = false;
-        
-        const levelOrder = ["A1", "A2", "B1", "B2", "C1"];
+        const levelOrder = ["A1","A2","B1","B2","C1"];
         let idx = levelOrder.indexOf(original.level);
-        if (original.repeatPenalty >= 3 && idx > 0) {
-            original.level = levelOrder[idx - 1];
-            original.repeatPenalty = 0;
-        }
-        
+        if (original.repeatPenalty >= 3 && idx > 0) { original.level = levelOrder[idx - 1]; original.repeatPenalty = 0; }
         saveToLocal();
-        moveToNextAfterAction();
-    }
-    
-    function moveToNextAfterAction() {
-        updateCurrentLevelList();
-        if (currentLevelWords.length > 0) {
-            if (currentIndex >= currentLevelWords.length) currentIndex = 0;
-            renderCard();
-        } else {
-            renderCard();
-        }
-        updateStatsUI();
+        updateFilteredList();
     }
 
-    function nextCard() {
-        if (currentLevelWords.length === 0) return;
-        currentIndex = (currentIndex + 1) % currentLevelWords.length;
-        renderCard();
-    }
-    
-    function prevCard() {
-        if (currentLevelWords.length === 0) return;
-        currentIndex = (currentIndex - 1 + currentLevelWords.length) % currentLevelWords.length;
-        renderCard();
-    }
-    
-    function changeLevel(level) {
-        currentLevel = level;
-        saveToLocal();
-        currentIndex = 0;
-        updateCurrentLevelList();
-        renderCard();
-        
+    function nextCard() { if (filteredWords.length) { currentIndex = (currentIndex + 1) % filteredWords.length; renderCard(); } }
+    function prevCard() { if (filteredWords.length) { currentIndex = (currentIndex - 1 + filteredWords.length) % filteredWords.length; renderCard(); } }
+
+    // ========== СМЕНА ФИЛЬТРОВ ==========
+    function changeLevel(level) { currentLevel = level; currentIndex = 0; saveToLocal(); updateFilteredList(); updateActiveButtons(); }
+    function changePos(pos) { currentPos = pos; currentIndex = 0; saveToLocal(); updateFilteredList(); updateActiveButtons(); }
+
+    function updateActiveButtons() {
         document.querySelectorAll(".level-btn").forEach(btn => {
-            if (btn.getAttribute("data-level") === level) {
-                btn.classList.add("active");
-            } else {
-                btn.classList.remove("active");
-            }
+            if (btn.getAttribute("data-level") === currentLevel) btn.classList.add("active");
+            else btn.classList.remove("active");
         });
-        updateStatsUI();
-    }
-    
-    function updateStatsUI() {
-        const levelWords = words.filter(w => w.level === currentLevel);
-        const total = levelWords.length;
-        const masteredCount = levelWords.filter(w => w.mastered === true).length;
-        const repeatCount = levelWords.filter(w => (w.repeatPenalty || 0) > 0).length;
-        document.getElementById("totalCount").innerText = total;
-        document.getElementById("learnedCount").innerText = masteredCount;
-        document.getElementById("reviewCount").innerText = repeatCount;
-        
+        document.querySelectorAll(".pos-btn").forEach(btn => {
+            if (btn.getAttribute("data-pos") === currentPos) btn.classList.add("active");
+            else btn.classList.remove("active");
+        });
         const levelNames = { A1:"A1 · начальный", A2:"A2 · базовый", B1:"B1 · средний", B2:"B2 · выше среднего", C1:"C1 · продвинутый" };
         document.getElementById("levelBadge").innerHTML = levelNames[currentLevel] || currentLevel;
     }
-    
-    // ---------- ДОБАВЛЕНИЕ СЛОВА СО СЛУЧАЙНЫМ ЭМОДЗИ ----------
+
+    function updateStatsUI() {
+        const levelWords = words.filter(w => w.level === currentLevel);
+        document.getElementById("totalCount").innerText = levelWords.length;
+        document.getElementById("learnedCount").innerText = levelWords.filter(w => w.mastered === true).length;
+        document.getElementById("reviewCount").innerText = levelWords.filter(w => (w.repeatPenalty || 0) > 0).length;
+    }
+
+    // ========== ДОБАВЛЕНИЕ НОВОГО СЛОВА ==========
     function addNewWord() {
         const word = document.getElementById("newWord").value.trim();
-        const translation = document.getElementById("newTrans").value.trim();
-        let userEmoji = document.getElementById("newEmoji").value.trim();
+        const trans = document.getElementById("newTrans").value.trim();
+        const pos = document.getElementById("newPos").value;
         const level = document.getElementById("newLevel").value;
-        
-        if (!word || !translation) {
-            alert("введите слово и перевод 💕");
-            return;
-        }
-        
-        // если пользователь не указал эмодзи — берём случайный
-        let finalEmoji = userEmoji;
-        if (!finalEmoji) {
-            finalEmoji = getRandomEmoji();
-        }
-        
+        let emoji = document.getElementById("newEmoji").value.trim();
+        if (!word || !trans) { alert("введите слово и перевод"); return; }
+        if (!emoji) emoji = getRandomEmoji();
         const newId = Date.now();
-        words.push({
-            id: newId,
-            word: word,
-            translation: translation,
-            level: level,
-            mastered: false,
-            repeatPenalty: 0,
-            emoji: finalEmoji
-        });
-        
+        words.push({ id: newId, word, translation: trans, level, pos, mastered: false, repeatPenalty: 0, emoji });
         saveToLocal();
-        
         document.getElementById("newWord").value = "";
         document.getElementById("newTrans").value = "";
         document.getElementById("newEmoji").value = "";
-        
-        if (level === currentLevel) {
-            updateCurrentLevelList();
-            renderCard();
-        }
+        if (level === currentLevel && (currentPos === "all" || currentPos === pos)) updateFilteredList();
         updateStatsUI();
     }
-    
-    // ---------- ИНИЦИАЛИЗАЦИЯ ----------
-    loadFromLocal();
-    updateCurrentLevelList();
-    
-    document.getElementById("cardWrapper").addEventListener("click", flipCard);
-    document.getElementById("knowBtn").addEventListener("click", markAsKnown);
-    document.getElementById("dontKnowBtn").addEventListener("click", markAsDontKnow);
-    document.getElementById("nextBtn").addEventListener("click", nextCard);
-    document.getElementById("prevBtn").addEventListener("click", prevCard);
-    document.getElementById("addWordBtn").addEventListener("click", addNewWord);
-    
-    document.querySelectorAll(".level-btn").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            changeLevel(btn.getAttribute("data-level"));
+
+    // ========== ИНИЦИАЛИЗАЦИЯ ==========
+    function initApp() {
+        loadProgressFromLocal();
+        updateFilteredList();
+        updateActiveButtons();
+        
+        document.getElementById("cardWrapper").addEventListener("click", flipCard);
+        document.getElementById("knowBtn").addEventListener("click", markAsKnown);
+        document.getElementById("dontKnowBtn").addEventListener("click", markAsDontKnow);
+        document.getElementById("nextBtn").addEventListener("click", nextCard);
+        document.getElementById("prevBtn").addEventListener("click", prevCard);
+        document.getElementById("addWordBtn").addEventListener("click", addNewWord);
+        document.querySelectorAll(".level-btn").forEach(btn => btn.addEventListener("click", () => changeLevel(btn.getAttribute("data-level"))));
+        document.querySelectorAll(".pos-btn").forEach(btn => btn.addEventListener("click", () => changePos(btn.getAttribute("data-pos"))));
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowLeft") prevCard();
+            if (e.key === "ArrowRight") nextCard();
+            if (e.key === " " || e.key === "Space") { e.preventDefault(); flipCard(); }
+            if (e.key === "Enter" && !["newWord","newTrans","newEmoji"].includes(document.activeElement?.id)) { e.preventDefault(); markAsKnown(); }
         });
-    });
-    
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowLeft") prevCard();
-        if (e.key === "ArrowRight") nextCard();
-        if (e.key === " " || e.key === "Space") {
-            e.preventDefault();
-            flipCard();
-        }
-        if (e.key === "Enter" && document.activeElement !== document.getElementById("newWord") && 
-            document.activeElement !== document.getElementById("newTrans") &&
-            document.activeElement !== document.getElementById("newEmoji")) {
-            e.preventDefault();
-            markAsKnown();
-        }
-    });
-    
-    changeLevel(currentLevel);
+    }
+
+    // Запуск
+    loadWords();
 </script>
 </body>
 </html>
